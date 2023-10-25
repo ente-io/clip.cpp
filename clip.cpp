@@ -794,7 +794,7 @@ void * preprocess_image(void * arg) {
     // Call the original preprocess function on the image
     clip_image_preprocess(ctx, input, resized);
 
-    // pthread_exit(NULL);
+     pthread_exit(NULL);
 }
 
 // Function to batch-preprocess multiple images i
