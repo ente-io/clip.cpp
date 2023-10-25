@@ -784,18 +784,18 @@ typedef struct {
     const clip_ctx * ctx;
 } ImageData;
 
-// Function to preprocess a single image in a thread
-void * preprocess_image(void * arg) {
-    ImageData * imageData = static_cast<ImageData *>(arg);
-    const clip_image_u8 * input = imageData->input;
-    clip_image_f32 * resized = imageData->resized;
-    const clip_ctx * ctx = imageData->ctx;
+// // Function to preprocess a single image in a thread
+// void * preprocess_image(void * arg) {
+//     ImageData * imageData = static_cast<ImageData *>(arg);
+//     const clip_image_u8 * input = imageData->input;
+//     clip_image_f32 * resized = imageData->resized;
+//     const clip_ctx * ctx = imageData->ctx;
 
-    // Call the original preprocess function on the image
-    clip_image_preprocess(ctx, input, resized);
+//     // Call the original preprocess function on the image
+//     clip_image_preprocess(ctx, input, resized);
 
-     pthread_exit(NULL);
-}
+//      pthread_exit(NULL);
+// }
 
 // Function to batch-preprocess multiple images i
 // void clip_image_batch_preprocess(const clip_ctx * ctx, const int n_threads, const clip_image_u8_batch * img_inputs,
