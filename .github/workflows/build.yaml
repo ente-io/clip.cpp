@@ -25,7 +25,6 @@ jobs:
 
       - name: Build C++ program
         run: |
-          cd src/
           mkdir -p build
           cd build
           cmake ..
@@ -35,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: clip-${{ matrix.os }}
-          path: src/build/clip*
+          path: build/clip*
