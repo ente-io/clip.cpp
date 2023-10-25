@@ -1397,7 +1397,7 @@ bool clip_compare_text_and_image(const clip_ctx * ctx, const int n_threads, cons
         return false;
     }
 
-    if (!clip_text_encode(ctx, n_threads, &tokens, txt_vec, true)) {
+    if (!clip_text_encode(ctx, n_threads, &tokens, txt_vec.data(), true)) {
         return false;
     }
 
@@ -1408,12 +1408,12 @@ bool clip_compare_text_and_image(const clip_ctx * ctx, const int n_threads, cons
         return false;
     }
 
-    if (!clip_image_encode(ctx, n_threads, &img_res, img_vec, true)) {
+    if (!clip_image_encode(ctx, n_threads, &img_res, img_vec.data(), true)) {
         return false;
     }
 
     // compute similarity
-    *score = clip_similarity_score(img_vec, txt_vec, projection_dim);
+    *score = clip_similarity_score(img_vec.data(), txt_vec.data(), projection_dim);
 
     return true;
 }
