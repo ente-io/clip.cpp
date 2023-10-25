@@ -1367,7 +1367,7 @@ bool clip_compare_text_and_image(const clip_ctx * ctx, const int n_threads, cons
     }
 
     // prepare image and text vectors
-    const int projection_dim = ctx->vision_model.hparams.projection_dim;
+    int projection_dim = ctx->vision_model.hparams.projection_dim;
     float img_vec[projection_dim];
     float txt_vec[projection_dim];
 
@@ -1459,7 +1459,7 @@ bool clip_zero_shot_label_image(struct clip_ctx * ctx, const int n_threads, cons
     // load the image
     clip_image_f32 img_res;
 
-    int vec_dim = clip_get_vision_hparams(ctx)->projection_dim;
+    const int vec_dim = clip_get_vision_hparams(ctx)->projection_dim;
 
     clip_image_preprocess(ctx, input_img, &img_res);
 
