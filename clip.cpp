@@ -419,11 +419,17 @@ struct clip_ctx * clip_model_load(const char * fname, const int verbosity = 1) {
 
     // load tensors
     {
-        struct ggml_init_params params = {
-            .mem_size = ctx_size,
-            .mem_buffer = NULL,
-            .no_alloc = false,
-        };
+        // struct ggml_init_params params = {
+        //     .mem_size = ctx_size,
+        //     .mem_buffer = NULL,
+        //     .no_alloc = false,
+        // };
+        ggml_init_params params;
+        params.mem_size = ctx_size;
+        params.mem_buffer = NULL;
+        params.no_alloc = false;
+
+        
 
         new_clip->ctx = ggml_init(params);
         if (!new_clip->ctx) {
@@ -864,11 +870,15 @@ bool clip_text_encode(const clip_ctx * ctx, const int n_threads, const clip_toke
 
     auto & buf_compute = ctx->buf_compute;
 
-    struct ggml_init_params params = {
-        .mem_size = buf_compute.size,
-        .mem_buffer = buf_compute.data,
-        .no_alloc = false,
-    };
+    ggml_init_params params;
+    params.mem_size = buf_compute.size;
+    params.mem_buffer = buf_compute.data;
+    params.no_alloc = false;
+    // struct ggml_init_params params = {
+    //     .mem_size = buf_compute.size,
+    //     .mem_buffer = buf_compute.data,
+    //     .no_alloc = false,
+    // };
 
     struct ggml_context * ctx0 = ggml_init(params);
     struct ggml_cgraph gf = {};
@@ -1098,11 +1108,19 @@ bool clip_image_batch_encode(const clip_ctx * ctx, const int n_threads, const cl
 
     auto & buf_compute = ctx->buf_compute;
 
-    struct ggml_init_params params = {
-        .mem_size = buf_compute.size,
-        .mem_buffer = buf_compute.data,
-        .no_alloc = false,
-    };
+    // struct ggml_init_params params = {
+    //     .mem_size = buf_compute.size,
+    //     .mem_buffer = buf_compute.data,
+    //     .no_alloc = false,
+    // };
+    ggml_init_params params;
+    params.mem_size = buf_compute.size;
+    params.mem_buffer = buf_compute.data;
+    params.no_alloc = false;
+
+    
+
+
 
     struct ggml_context * ctx0 = ggml_init(params);
     struct ggml_cgraph gf = {};
@@ -1367,7 +1385,7 @@ bool clip_compare_text_and_image(const clip_ctx * ctx, const int n_threads, cons
     }
 
     // prepare image and text vectors
-    const int projection_dim = ctx->vision_model.hparams.projection_dim;
+    int projection_dim = ctx->vision_model.hparams.projection_dim;
     float img_vec[projection_dim];
     float txt_vec[projection_dim];
 
@@ -1459,7 +1477,7 @@ bool clip_zero_shot_label_image(struct clip_ctx * ctx, const int n_threads, cons
     // load the image
     clip_image_f32 img_res;
 
-    const int vec_dim = clip_get_vision_hparams(ctx)->projection_dim;
+    int vec_dim = clip_get_vision_hparams(ctx)->projection_dim;
 
     clip_image_preprocess(ctx, input_img, &img_res);
 
