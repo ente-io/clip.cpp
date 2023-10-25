@@ -25,10 +25,9 @@ jobs:
 
       - name: Build C++ program
         run: |
-          cd src/
           mkdir -p build
           cd build
-          cmake ..
+          cmake -DCMAKE_CXX_STANDARD=20 ..
           cmake --build .  # Use CMake to build the project
 
       - name: Upload artifact
