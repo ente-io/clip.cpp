@@ -1386,8 +1386,10 @@ bool clip_compare_text_and_image(const clip_ctx * ctx, const int n_threads, cons
 
     // prepare image and text vectors
     int projection_dim = ctx->vision_model.hparams.projection_dim;
-    float img_vec[projection_dim];
-    float txt_vec[projection_dim];
+    std::vector<float> img_vec(projection_dim);
+    std::vector<float> txt_vec(projection_dim);
+    // float img_vec[projection_dim];
+    // float txt_vec[projection_dim];
 
     // tokenize and encode text
     clip_tokens tokens;
@@ -1481,8 +1483,9 @@ bool clip_zero_shot_label_image(struct clip_ctx * ctx, const int n_threads, cons
 
     clip_image_preprocess(ctx, input_img, &img_res);
 
-    float img_vec[vec_dim];
+    float* img_vec = new float[vec_dim];
     if (!clip_image_encode(ctx, n_threads, &img_res, img_vec, false)) {
+        delete[] img_vec;
         return false;
     }
 
@@ -1499,11 +1502,9 @@ bool clip_zero_shot_label_image(struct clip_ctx * ctx, const int n_threads, cons
         clip_text_encode(ctx, n_threads, &tokens, txt_vec, false);
         similarities[i] = clip_similarity_score(img_vec, txt_vec, vec_dim);
     }
-    
-
+    delete[] img_vec;
     delete[] txt_vec;
     delete[] similarities;
-
 
     // apply softmax and sort scores
     softmax_with_sorting(similarities, n_labels, scores, indices);
