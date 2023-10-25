@@ -1487,8 +1487,10 @@ bool clip_zero_shot_label_image(struct clip_ctx * ctx, const int n_threads, cons
     }
 
     // encode texts and compute similarities
-    float txt_vec[vec_dim];
-    float similarities[n_labels];
+    // float txt_vec[vec_dim];
+    // float similarities[n_labels];
+    float* txt_vec = new float[vec_dim];
+    float* similarities = new float[n_labels];
 
     for (int i = 0; i < n_labels; i++) {
         const auto & text = labels[i];
@@ -1497,6 +1499,11 @@ bool clip_zero_shot_label_image(struct clip_ctx * ctx, const int n_threads, cons
         clip_text_encode(ctx, n_threads, &tokens, txt_vec, false);
         similarities[i] = clip_similarity_score(img_vec, txt_vec, vec_dim);
     }
+    
+
+    delete[] txt_vec;
+    delete[] similarities;
+
 
     // apply softmax and sort scores
     softmax_with_sorting(similarities, n_labels, scores, indices);
