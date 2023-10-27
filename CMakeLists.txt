@@ -180,7 +180,7 @@ if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES
         # TODO: arm msvc?
     else()
         if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
-            add_compile_options(-mcpu=native)
+            add_compile_options(-mcpu=apple-m1)
         endif()
         # TODO: armv6,7,8 version specific flags
     endif()
