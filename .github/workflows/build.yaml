@@ -29,10 +29,10 @@ jobs:
           cd build
           cmake -DCMAKE_CXX_STANDARD=20 ..
           cmake --build .  # Use CMake to build the project
-          ls bin
+          ls bin/Debug
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: clip-${{ matrix.os }}
-          path: build/bin/main.exe
+          path: build/bin/Debug/main.exe
