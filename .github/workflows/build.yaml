@@ -29,7 +29,7 @@ jobs:
           cd build
           cmake -DCMAKE_CXX_STANDARD=20 ..
           cmake --build .  # Use CMake to build the project
-          ls 
+          ls bin
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
