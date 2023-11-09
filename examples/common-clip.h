@@ -6,6 +6,8 @@
 #include <map>
 #include <thread>
 #include <vector>
+#include <algorithm>
+#include <string>
 
 // #ifdef __cplusplus
 // extern "C" {
@@ -14,10 +16,6 @@
 std::map<std::string, std::vector<std::string>> get_dir_keyed_files(const std::string & path, uint32_t max_files_per_dir);
 
 bool is_image_file_extension(const std::string & path);
-
-#include <algorithm>
-#include <string>
-#include <vector>
 
 struct app_params {
     int32_t n_threads;
