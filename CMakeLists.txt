@@ -23,7 +23,7 @@ endif()
 #
 
 # general
-option(CLIP_STATIC                 "CLIP: static link libraries"                          OFF)
+option(CLIP_STATIC                 "CLIP: static link libraries"                          ON)
 option(CLIP_BUILD_TESTS             "CLIP: build tests"                                    ${CLIP_STANDALONE})
 option(CLIP_BUILD_EXAMPLES         "CLIP: build examples"                                 ON)
 option(CLIP_BUILD_IMAGE_SEARCH     "CLIP: build image-search"                             OFF)
