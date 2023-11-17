@@ -255,7 +255,7 @@ add_library(clip
 
 target_include_directories(clip PUBLIC .)
 target_compile_features(clip PUBLIC cxx_std_11)
-target_link_libraries(clip PRIVATE ggml ${CLIP_EXTRA_LIBS})
+target_link_libraries(clip PUBLIC ggml ${CLIP_EXTRA_LIBS})
 
 if (BUILD_SHARED_LIBS)
     set(CLIP_BUILD_EXAMPLES OFF)
